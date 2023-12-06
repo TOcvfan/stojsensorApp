@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Login from "../pages/Login/Login";
-import { Box } from "@mui/material";
-import Title from './title';
 import { user } from '../helpers/users';
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Home from "../pages/Home/Home";
@@ -13,8 +11,10 @@ import Frontpage from "../pages/frontpage/frontpage";
 import ControlPage from "../pages/Control/control";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userlogin, setUser] = useState(user.users[0]);
+  //const id = userlogin.id;
+
   const about = { name: 'About us', link: '/om' };
 
   let pagesLoggedIn = [
@@ -43,7 +43,7 @@ function App() {
     if (isLoggedIn) {
       return (
         <>
-          <Route path="/create" element={<NewUser />} />
+          <Route path="/create" element={<NewUser user={userlogin} />} />
           <Route path="/forside" element={<Frontpage user={userlogin} />} />
           <Route path="/control" element={<ControlPage user={userlogin} />} />
         </>

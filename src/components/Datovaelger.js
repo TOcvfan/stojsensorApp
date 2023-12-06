@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
-import { getYear, getDate, getMonth } from 'date-fns';
+import { format } from 'date-fns';
 import SimpelDato from './simpelDato';
 
-export default function DatoValger({ lan, setValue, dato }) {
-  const [year, setYear] = useState(getYear(new Date(dato)));
-  const [date, setDate] = useState(getDate(new Date(dato)));
-  const [month, setMonth] = useState(getMonth(new Date(dato)));
-  const set = lan === 'Dk';
+export default function DatoValger({ dato, setDato }) {
+  const [year, setYear] = useState(format(new Date(dato), 'yyyy'));
+  const [date, setDate] = useState(format(new Date(dato), 'dd'));
+  const [month, setMonth] = useState(format(new Date(dato), 'MM'));
+  console.log(dato)
+  //const birth = format(new Date(year, month, date), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+  console.log()
 
-  const monthEng = [
+  const months = [
     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
   ];
-  const monthDK = [
-    "Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December"
-  ];
-  const months = set ? monthDK : monthEng
 
   return (
-    <SimpelDato months={months} year={year} setYear={setYear} month={month} setMonth={setMonth} date={date} setValue={setValue} setDate={setDate} />
+    <SimpelDato months={months} year={year} setYear={setYear} month={month} setMonth={setMonth} date={date} setDate={setDate} setDato={setDato} />
   )
 
 }

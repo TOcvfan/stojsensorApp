@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { Text, CustomizedButtons, Title } from '../../components';
+import React from 'react';
+//import { useNavigate } from "react-router-dom";
+import { Title } from '../../components';
 import { Box } from '@mui/material';
 
-export default function Home({ setIsLoggedIn }) {
-    const navigate = useNavigate();
-
+export default function Home() {
+    //const navigate = useNavigate();
+    //css
     const centrer = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        textAlign: 'center',
         mt: 2
     }
 
@@ -19,7 +20,7 @@ export default function Home({ setIsLoggedIn }) {
         <Box sx={{
             centrer
         }}>
-            Home
+            <Title>Home</Title>
         </Box>
 
     );

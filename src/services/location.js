@@ -1,15 +1,8 @@
 import axios from 'axios';
 import config from '../helpers/config';
-/*const https = require('https');
-
-// Disable SSL certificate verification
-const agent = new https.Agent({
-    rejectUnauthorized: false,
-    requestCert: false,
-    agent: false,
-});*/
+//henter urlen til apien
 const url = config.baseURL + config.path
-
+//laver get metode til api
 const hent = async (setMessage, setError, sti) => {
     let res;
     //console.log(data)

@@ -3,22 +3,22 @@ import React from 'react';
 import { Box } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import SelectTextField from './selectTextfield';
+import { format } from 'date-fns';
 
-export default function SimpelDato({ months, year, setYear, month, setMonth, date, setDate, setValue }) {
-    const maxOffset = 90;
+export default function SimpelDato({ months, year, setYear, month, setMonth, date, setDate, setDato }) {
+    const maxOffset = 10;
 
     const yearList = Array.from(Array(maxOffset)).map((val, index) => year - index)
     const monthList = Array.from(Array(12)).map((val, index) => index)
     const dateList = Array.from(Array(31)).map((val, index) => index + 1)
+    console.log(year, month, date)
 
-    const saetnul = (dato) => dato < 10 ? '0' + dato : dato
-    const birth = `${year}-${saetnul(month + 1)}-${saetnul(date)}`
-    //console.log(year)
-    //console.log(months)
+    const birth = format(new Date(year, month, date), "yyyy-MM-dd")
+
     const handleYear = (event) => {
         setYear(event.target.value)
         //onChange(event.target.value);
-        setValue('foedselsdag', birth)
+        setDato(birth)
         console.log(birth)
     };
 
@@ -26,13 +26,13 @@ export default function SimpelDato({ months, year, setYear, month, setMonth, dat
         setMonth(event.target.value);
         //onChange(event);
         console.log(birth)
-        setValue('foedselsdag', birth)
+        setDato(birth)
     };
 
     const handleDate = (event) => {
         setDate(event.target.value);
         //onChange(event);
-        setValue('foedselsdag', birth)
+        setDato(birth)
         console.log(birth)
     };
 

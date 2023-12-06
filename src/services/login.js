@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import config from '../helpers/config';
+//import config from '../helpers/config';
 import { user } from '../helpers/users';
 //import axios from 'axios';
 let item;
@@ -8,8 +8,9 @@ if (typeof window !== 'undefined') {
 }
 
 const currentUserSubject = new BehaviorSubject(item);
-const url = config.baseURL + config.path;
-
+//url til apien
+//const url = config.baseURL + config.path;
+//håndterer login kaldet
 const login = async (data, setMessage) => {
 
     user.users.filter(u => {

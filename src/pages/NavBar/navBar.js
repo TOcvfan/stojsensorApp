@@ -3,17 +3,18 @@ import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, 
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import MenuIcon from '@mui/icons-material/Menu';
-import { authentication } from '../../services/login';
+//import { authentication } from '../../services/login';
 
 const NavBar = ({ navn, isLoggedIn, pages }) => {
+    //variabler
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
 
-
-    const logout = () => {
+    //logger brugeren ud
+    /*const logout = () => {
         authentication.logout();
-    }
-
+    }*/
+    //åbner og lukker menyerne
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -28,7 +29,7 @@ const NavBar = ({ navn, isLoggedIn, pages }) => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
+    //links til siderne
     const MenuItems = ({ farve, retning }) => {
         const StyledLink = styled(Link)`
             text-decoration: none;
