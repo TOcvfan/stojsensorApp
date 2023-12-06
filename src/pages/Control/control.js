@@ -11,9 +11,9 @@ export default function ControlPage({ user }) {
     //const [data, setData] = useState([]);
     const [titleString, setTitleString] = useState('');
     const [dataInfo, setData] = useState([])
+    const [userlocations, setUserLocations] = useState({});
     /*const [error, setError] = useState({});
     const [startDate, setStartDate] = useState();
-    const [userlocations, setUserLocations] = useState({});
     const [endDate, setEndDate] = useState();*/
     const id = user.id;
     const datoFormat = (dato) => format(new Date(dato), 'dd/MM/yyyy HH:mm');
