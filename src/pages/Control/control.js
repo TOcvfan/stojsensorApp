@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
 //import { useNavigate } from "react-router-dom";
-//import { Text, CustomizedButtons, Title, DatoValger } from '../../components';
+import { CustomizedButtons } from '../../components';
 import { format } from 'date-fns'
 import Plot from 'react-plotly.js';
 import { data } from '../../helpers/messurements';
 import { Box } from '@mui/material';
-//import hent from '../../services/location';
+import MapPage from './map';
+import hent from '../../services/location';
 
 export default function ControlPage({ user }) {
     //const [data, setData] = useState([]);
     const [titleString, setTitleString] = useState('');
-    const [dataInfo, setData] = useState([])
+    const [dataInfo, setData] = useState({})
+    const [locations, setLocations] = useState({});
     const [userlocations, setUserLocations] = useState({});
-    /*const [error, setError] = useState({});
+    const [showMap, setShowMap] = useState(false);
+    const [error, setError] = useState({});
     const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();*/
+    const [endDate, setEndDate] = useState();
     const id = user.id;
     const datoFormat = (dato) => format(new Date(dato), 'dd/MM/yyyy HH:mm');
     const centrer = {
@@ -27,38 +30,35 @@ export default function ControlPage({ user }) {
 
     useEffect(() => {
         //Henter data fra json fil
-        const fetchData = () => {
+        /*const fetchData = () => {
             const result = data.filter(d => {
-                console.log(d)
+                //console.log(d)
                 return d.id === id
             })
             return result
-        }
+        }*/
         //Henter data fra api
-        /*hent(setData, setError, '/Location/GeoLocation/1?LocationID=3').then((d) => {
-            console.log(d)
-        })*/
-        const result = fetchData()
+        hent(setLocations, setError, `/Location/${id}`).then((d) => {
+            //console.log(d.geoLocations[0])
+            //console.log(locations)
+            setUserLocations(d.geoLocations[0])
+        })
+        hent(setData, setError, `/Location/GeoLocation/MeasurementSet/${id}?GeoLocationID=${2}&LocationID=${2}`).then((d) => {
+            setStartDate(datoFormat(d.startDate))
+            setEndDate(datoFormat(d.endDate))
+        })
+        //const result = fetchData()
         //lægger data i en useState
-        setData(result)
+        //setData(result)
         //console.log(result)
-    }, [id]);
+    }, []);
 
     useEffect(() => {
-        //setData(dataInfo) 'test'
         //sætter titel til plotly
-        const title = () => dataInfo?.map(g => {
-            return g.geoLocations.map(p => {
-                const dato = p.mesurrementSets[0]
-                //console.log(dato.startDate)
-                //setStartDate(dato.startDate)
-                //setEndDate(dato.endDate)
-                setTitleString(`start: ${datoFormat(dato.startDate)} slut: ${datoFormat(dato.endDate)}`)
-                return dato
-            })
-        })
+        const title = () => {
+            setTitleString(`start: ${startDate} slut: ${endDate}`)
+        }
         title()
-        //setTitleString(`start: ${datoFormat(startDate)} slut: ${datoFormat(endDate)}`)
     }, [dataInfo]);
     //console.log(dataInfo)
     //Ændrer dato til plotly (virker ikke lige nu)
@@ -67,50 +67,36 @@ export default function ControlPage({ user }) {
             <DatoValger dato={date} setDato={setDato} />
         )
     }*/
+    const handleMap = (p) => {
+        console.log(p)
+        setLocations({ lng: p?.longitude, lat: p?.latitude })
+        setShowMap(true)
+    }
 
     let x = [];
     let y = [];
     //lægger valgte data i array til plotly
     const nydata = () => {
         if (dataInfo) {
-            dataInfo?.map(g => {
-                return g.geoLocations.map(p => {
-                    const sort = p.mesurrementSets[0].messurements.sort((p1, p2) => (p1.dateTime > p2.dateTime) ? 1 : (p1.dateTime < p2.dateTime) ? -1 : 0)
-                    return sort.map((DB) => {
-                        y.push(DB.decibel)
-                        x.push(DB.dateTime)
-                        return { x, y }
-                    })
-                })
+            const sort = dataInfo.measurements//?.sort((p1, p2) => (p1.arduinoID > p2.arduinoID) ? 1 : (p1.arduinoID < p2.arduinoID) ? -1 : 0)
+            //console.log(sort?.sort((p1, p2) => (p1.arduinoID > p2.arduinoID) ? 1 : (p1.arduinoID < p2.arduinoID) ? -1 : 0))
+            sort?.shift()
+            sort?.map((DB) => {
+                y.push(DB.decibel)
+                x.push(DB.dateTime)
+                return { x, y }
             })
         }
     }
     //viser start og slut dato på valgte målinger
-    const visDato = () => {
-        if (dataInfo) {
-            return dataInfo?.map(g => {
-                return g.geoLocations.map(p => {
-                    const dato = p.mesurrementSets[0]
-                    return (
-                        <Box sx={{ color: 'blue' }} key={dato.id}>start: {datoFormat(dato.startDate)} slut: {datoFormat(dato.endDate)} </Box>
-                    )
-                })
-            })
-        }
-    }
-    //viser geolokation på valgte måling
-    const position = () => {
-        if (dataInfo) {
-            return dataInfo?.map(g => {
-                return g.geoLocations.map(p => {
-                    console.log(p)
-                    return (
-                        <Box sx={{ color: 'blue' }} key={p.id}>latitude: {p.latitude} longtitude: {p.longtitude} </Box>
-                    )
-                })
-            })
-        }
-    }
+    const visDato = <Box sx={{ color: 'blue' }}>start: {startDate} slut: {endDate} </Box>
+
+    //viser geolokation på valgte måling og sætter dem til kort
+
+    const position = <Box sx={{ color: 'blue' }} >
+        latitude: {userlocations?.latitude} longtitude: {userlocations?.longitude}
+        <CustomizedButtons onClick={() => handleMap(userlocations)}>Show on map</CustomizedButtons>
+    </Box>
 
     //console.log(x);*/
     if (dataInfo) {
@@ -119,9 +105,9 @@ export default function ControlPage({ user }) {
 
     return (
         <Box sx={centrer}>
-            {position()}
+            {position}
             <Box>2023</Box>
-            {visDato()}
+            {visDato}
             <Plot
                 data={[
                     {
@@ -131,10 +117,12 @@ export default function ControlPage({ user }) {
                         mode: 'lines+markers',
                         marker: { color: 'red' },
                     },
-                    //{ type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
                 ]}
                 layout={{ width: 1200, height: 500, title: titleString }}
             />
+            {
+                showMap ? <MapPage geoLocations={locations} /> : <Box></Box>
+            }
         </Box>
     );
 }

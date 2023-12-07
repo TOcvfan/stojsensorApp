@@ -6,8 +6,8 @@ export const data = [
         "geoLocations": [
             {
                 "id": 1,
-                "latitude": 55.868131017940414,
-                "longtitude": 9.88157176495979,
+                "latitude": 56.7901515,
+                "longtitude": 9.2158432,
                 "mesurrementSets": [
                     {
                         "id": 0,
@@ -24,13 +24,13 @@ export const data = [
                             {
                                 "id": 0,
                                 "decibel": 76,
-                                "dateTime": "2023-11-15T01:16:32.672Z",
+                                "dateTime": "2023-11-15T01:16:32Z",
                                 "arduinoID": "Jensen01"
                             },
                             {
                                 "id": 1,
                                 "decibel": 66,
-                                "dateTime": "2023-11-10T00:33:17.515Z",
+                                "dateTime": "2023-11-10T00:33Z",
                                 "arduinoID": "Jensen01"
                             },
                             {

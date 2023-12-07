@@ -1,7 +1,7 @@
 export const user = {
     users: [
         {
-            "id": 0,
+            "id": 2,
             "email": "kunde1@mail.us",
             "firstname": "Rosie",
             "lastname": "Martinez",
@@ -21,7 +21,7 @@ export const user = {
             "token": 2
         },
         {
-            "id": 2,
+            "id": 0,
             "email": "admin@mail.dk",
             "firstname": "Chr",
             "lastname": "tosse",
