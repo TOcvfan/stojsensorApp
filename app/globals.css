@@ -1,0 +1,225 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(89deg, #FF5EDF 0%, #04C6DE 100%);
+   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+  font-family: "Muli", sans-serif;
+  text-align: center;
+  margin-top: 75px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.invalid-feedback {
+  font-weight: bold;
+  font-size: large;
+}
+
+
+.buttons {
+  display: inline-block;
+  justify-content: center;
+}
+
+.button {
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 15px;
+  letter-spacing: 4px;
+  position: relative;
+  background-color: blue;
+  border: none;
+  /*color: #fff;*/
+  padding: 15px;
+  width: 150px;
+  text-align: center;
+  transition-duration: 0.4s;
+  overflow: hidden;
+  box-shadow: 0 5px 15px purple;
+  border-radius: 4px;
+}
+.MuiButtonGroup-outlined{
+  background-color: #fff;
+}
+
+.button:hover {
+  background: #fff;
+  box-shadow: 0px 2px 10px 5px gold;
+  color: #000;
+}
+
+.button:after {
+  content: "";
+  background: gold;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+.button:focus {
+  outline: 0;
+}
+
+label {
+  color: blue;
+}
+
+.text {
+  text-align: left;
+}
+
+.flagskift {
+  position: relative;
+  width: 5%;
+  height: auto;
+}
+
+.image {
+  display: block;
+  width: 100%;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  right: 0;
+  background-color: #008CBA;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: .5s ease;
+}
+
+.flagskift:hover .overlay {
+  width: 100%;
+  left: 0;
+}
+
+.txt {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.flag {
+  width: 15px;
+}
+
+.hej {
+  text-align: left;
+}
+
+a {
+  text-decoration: none;
+}
+
+.land {
+  font-size: 10px;
+}
+
+.countdown {
+  font-size: 75px;
+  margin: 10px;
+  font-family: "Lobster", sans-serif;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  color: white;
+}
+
+.countdown-wrapper {
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  width: 35%;
+  flex-flow: row wrap;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 4px 4px 12px 2px rgba(black, 0.3);
+  padding: 40px 40px 30px;
+}
+
+.countdown-item {
+  margin: 0 auto;
+  color: #333;
+  display: flex;
+  font-size: 40px;
+  justify-content: space-evenly;
+  flex-flow: column wrap;
+  line-height: 30px;
+  padding-top: 10px;
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.countdown-item span {
+  color: #333;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.countdown-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
+
+/*span::before,
+span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #3cefff;
+  transform-origin: center right;
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+
+span::before {
+  top: 0;
+}
+
+span::after {
+  bottom: 0;
+}
+
+span:hover::before,
+span:hover::after {
+  transform-origin: center left;
+  transform: scaleX(1);
+}*/

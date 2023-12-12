@@ -1,0 +1,382 @@
+{
+    "dansk": {
+        "arbejde": [
+            {
+                "arbejdssted": "Scandibyg",
+                "tidspunkt": 2022,
+                "beskrivelse": [
+                    "Produktionsmedarbejder",
+                    "tømrer arbejde"
+                ]
+            },
+            {
+                "arbejdssted": "JB-sikring",
+                "tidspunkt": "2019 - 2021",
+                "beskrivelse": [
+                    "Portner og vagt arbejde"
+                ]
+            },
+            {
+                "arbejdssted": "ICO PAL Amager",
+                "tidspunkt": 2018,
+                "beskrivelse": [
+                    "Lagermedarbejder",
+                    "Truck kørsel",
+                    "pak og pluk"
+                ]
+            },
+            {
+                "arbejdssted": "cBrain (6 mdr. praktik via uddannelsen)",
+                "tidspunkt": "2016 - 2017",
+                "beskrivelse": [
+                    "App udvikling/ Selvbetjenings værktøj til kommunerne",
+                    "Webservice/ Analyseværktøj til SKAT's program F2"
+                ]
+            },
+            {
+                "arbejdssted": "DETO Højerup",
+                "tidspunkt": 2009,
+                "beskrivelse": [
+                    "Lastbilchauffør"
+                ]
+            },
+            {
+                "arbejdssted": "PostDanmark",
+                "tidspunkt": "2007 - 2008",
+                "beskrivelse": [
+                    "Postbud",
+                    "Lødagsomdeler"
+                ]
+            },
+            {
+                "arbejdssted": "Bdr. K. Hansen",
+                "tidspunkt": 2001,
+                "beskrivelse": [
+                    "Gartnerafdelingen"
+                ]
+            },
+            {
+                "arbejdssted": "Garant gulvlægger Svendborg (nedlagt)",
+                "tidspunkt": 2000,
+                "beskrivelse": [
+                    "gulvlæggermedarbejder"
+                ]
+            },
+            {
+                "arbejdssted": "kontainerskib Svendborg maersk",
+                "tidspunkt": 1999,
+                "beskrivelse": [
+                    "ubefarenskibs assistent", "del af Mærsk Skibsfører uddannelse"
+                ]
+            },
+            {
+                "arbejdssted": "Haribo",
+                "tidspunkt": 1998,
+                "beskrivelse": [
+                    "Pakkerimedarbejder",
+                    "Produktsortering"
+                ]
+            }
+        ],
+        "hjem": {
+            "velkomst": "Hej ",
+            "om": "Om mig",
+            "spanier": "Jeg er halvt spanier og jeg bor i Strandby ved Farsø i eget hus.",
+            "alder1": "Jeg er ",
+            "alder2": "år og har ikke nogen børn og aldrig været gift, men det forsøger jeg dog at lave om på.",
+            "bue": "Bueskydning",
+            "buetekst": "Jeg startede med at gå til bueskydning mens jeg boede i Lyngby. Jeg har min egen bue og lige for tiden skyder jeg kun lidt i baghaven da der ikke er en klub i nærheden.",
+            "bil": "Min Bil",
+            "biltekst": "Dette er min Citroën 2cv fra 1984. Den hedder smølfine og det er derfor den har de farver den har."
+        },
+        "resume": {
+            "overskrift": "Kort resumé",
+            "et": "Jeg er ",
+            "to": "  år gammel og bor i Strandby ved farsø.",
+            "tre": "Har altid brugt tiden på at 'nørde' med Computer, hvilket er grundlag for min uddannelse.",
+            "fire": "Jeg programmerer meget i min fritid.",
+            "fem": "Jeg kommer også ud i den friske luft, gerne til bueskydning eller lave/ køre min bil (en Citroën 2cv)."
+        },
+        "uddannelse": [
+            {
+                "udd": "Datateknikker med speciale i programmering",
+                "tid": 2022,
+                "bem": "I gangværende, H2 afsluttet"
+            },
+            {
+                "udd": "Vagtkursus",
+                "tid": 2020,
+                "bem": "6 uger afsluttet i februar"
+            },
+            {
+                "udd": "Datamatikker",
+                "tid": "2014 - 2017",
+                "bem": "Mangler hovedopgave"
+            },
+            {
+                "udd": "Maskinmester uddannelsen",
+                "tid": "2011 - 2014",
+                "bem": "Ikke afsluttet"
+            },
+            {
+                "udd": "Automekanikker",
+                "tid": "2004 - 2008",
+                "bem": ""
+            },
+            {
+                "udd": "Mærsk Skibsfører uddannelse",
+                "tid": "1998 - 2001",
+                "bem": "Ikke afsluttet"
+            },
+            {
+                "udd": "Skoleskibet Danmark",
+                "tid": 1997,
+                "bem": ""
+            },
+            {
+                "udd": "Folkeskolens 10. klasse",
+                "tid": 1997,
+                "bem": "afsluttet i 1997"
+            }
+        ],
+        "it": [
+            "HTML, CSS",
+            "Microsoft Office",
+            "Windows - Linux",
+            "JavaScript - ReactJS, AngularJS",
+            "Web-service - JavaScript, Java, C#",
+            "SourceControl - git",
+            "Android - React Native, Android studio",
+            "Java - Threads, sockets, REST, security, arrays",
+            "Database - SQL, MySQL",
+            "Arduino - Assembler, C",
+            "Raspberry pi",
+            "Network - Wan, Lan",
+            "Heroku"
+        ],
+        "kompetencer": [
+            "Grundig",
+            "Mødestabil",
+            "Fleksibel på opgaver",
+            "Kvalitetsbevidst",
+            "Interesseret i at lære nye ting"
+        ],
+        "sprog": [
+            {
+                "sprog": "Dansk",
+                "niveau": "Flydende",
+                "code": "DK"
+            },
+            {
+                "sprog": "Engelsk",
+                "niveau": "Flydende",
+                "code": "GB"
+            },
+            {
+                "sprog": "Norsk",
+                "niveau": "Læse og forstå",
+                "code": "NO"
+            },
+            {
+                "sprog": "Svensk",
+                "niveau": "Læse og forstå",
+                "code": "SE"
+            }
+        ],
+        "kort": [
+            "B",
+            "C",
+            "Truckcertifikat"
+        ]
+    },
+    "engelsk": {
+        "arbejde": [
+            {
+                "arbejdssted": "Scandibyg",
+                "tidspunkt": 2022,
+                "beskrivelse": [
+                    "Productionworker",
+                    "Carpenter work"
+                ]
+            },
+            {
+                "arbejdssted": "JB-sikring",
+                "tidspunkt": "2019-2021",
+                "beskrivelse": [
+                    "gatekeeper and guard work"
+                ]
+            },
+            {
+                "arbejdssted": "ICO PAL Amager",
+                "tidspunkt": 2018,
+                "beskrivelse": [
+                    "Storageworker",
+                    "Forklift driving",
+                    "pack and pick"
+                ]
+            },
+            {
+                "arbejdssted": "cBrain (6 months internship from education)",
+                "tidspunkt": "2016-2017",
+                "beskrivelse": [
+                    "App development/ Selfservice tool for the counties",
+                    "Webservice/ Analysis tool for SKAT's program F2"
+                ]
+            },
+            {
+                "arbejdssted": "DETO Højerup",
+                "tidspunkt": 2009,
+                "beskrivelse": [
+                    "Truckdriver"
+                ]
+            },
+            {
+                "arbejdssted": "PostDanmark",
+                "tidspunkt": "2007-2008",
+                "beskrivelse": [
+                    "Mailman",
+                    "Saturday distribution"
+                ]
+            },
+            {
+                "arbejdssted": "Bdr. K. Hansen",
+                "tidspunkt": 2001,
+                "beskrivelse": [
+                    "Gardener department"
+                ]
+            },
+            {
+                "arbejdssted": "Garant flooring Svendborg (closed down)",
+                "tidspunkt": 2000,
+                "beskrivelse": [
+                    "flooring employee"
+                ]
+            },
+            {
+                "arbejdssted": "Containership Svendborg maersk",
+                "tidspunkt": 1999,
+                "beskrivelse": [
+                    "trainee", "part of maersk shipmaster education"
+                ]
+            },
+            {
+                "arbejdssted": "Haribo",
+                "tidspunkt": 1998,
+                "beskrivelse": [
+                    "Packaging worker",
+                    "Product sorting"
+                ]
+            }
+        ],
+        "hjem": {
+            "velkomst": "Hello ",
+            "om": "About me",
+            "spanier": "I'm half spanish half danish and I live in Strandby at farsø.",
+            "alder1": "I'm ",
+            "alder2": " years old, with no kids and never married, but I'm trying to fix that.",
+            "bue": "Archery",
+            "buetekst": "I started with archery in 2012. I have my own bow, but at thw moment I'm only shooting in the back yard, because there isn't a club nearby.",
+            "bil": "My car",
+            "biltekst": "This is my Citroën 2cv from 1984. It's called smurfette and that's why it's colored the way it is."
+        },
+        "resume": {
+            "overskrift": "Short about me",
+            "et": "I'm ",
+            "to": " years old and live in Strandby at Farsø.",
+            "tre": "I have always used my sparetime on 'nerding' with computers, whitch is basic for my education.",
+            "fire": "I program alot in my sparetime.",
+            "fem": "I also come out, shooting with bow and arrow or work on my car (a citroën 2cv)"
+        },
+        "uddannelse": [
+            {
+                "udd": "Datatechnician with speciality in programming",
+                "tid": 2022,
+                "bem": "In progress"
+            },
+            {
+                "udd": "Guard curse",
+                "tid": 2020,
+                "bem": "6 weeks finished in febuary"
+            },
+            {
+                "udd": "Computer science",
+                "tid": "2014 - 2017",
+                "bem": "Missing last assingment"
+            },
+            {
+                "udd": "Marine engineer education",
+                "tid": "2011 - 2014",
+                "bem": "unfinished"
+            },
+            {
+                "udd": "Car mechanich",
+                "tid": "2004 - 2008",
+                "bem": ""
+            },
+            {
+                "udd": "Maersk shipmaster education",
+                "tid": "1998 - 2001",
+                "bem": "unfinished"
+            },
+            {
+                "udd": "Trainingship Denmark",
+                "tid": 1997,
+                "bem": ""
+            },
+            {
+                "udd": "10. grade",
+                "tid": 1997,
+                "bem": "finished in 1997"
+            }
+        ],
+        "it": [
+            "HTML, CSS",
+            "Microsoft Office",
+            "Windows - Linux",
+            "JavaScript - ReactJS, AngularJS",
+            "Web-service - JavaScript, Java, C#",
+            "SourceControl - git",
+            "Android - React Native, Android studio",
+            "Java - Threads, sockets, REST, security, arrays",
+            "Database - SQL, MySQL",
+            "Arduino - Assembler, C",
+            "Raspberry pi",
+            "Network - Wan, Lan",
+            "Heroku"
+        ],
+        "kompetencer": [
+            "Thorough",
+            "Meeting stable",
+            "Flexible on assignments",
+            "Quality conscious",
+            "Interested in learning new things"
+        ],
+        "sprog": [
+            {
+                "sprog": "English",
+                "niveau": "Fluently",
+                "code": "GB"
+            },
+            {
+                "sprog": "Danish",
+                "niveau": "Fluently",
+                "code": "DK"
+            },
+            {
+                "sprog": "Norwegian",
+                "niveau": "Read and understand",
+                "code": "NO"
+            },
+            {
+                "sprog": "Swedish",
+                "niveau": "Read and understand",
+                "code": "SE"
+            }
+        ],
+        "kort": [
+            "B",
+            "C",
+            "Forklift certificate"
+        ]
+    }
+}
