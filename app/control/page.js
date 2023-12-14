@@ -1,13 +1,9 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { CustomizedButtons } from '$/Components';
-import { format } from 'date-fns'
 import { useAppContext } from '$/AppContext';
 import Plot from 'react-plotly.js';
-//import { data } from '@/helpers/messurements';
-import { LoadScript } from "@react-google-maps/api";
 import { Box } from '@/lib/mui';
-import MapPage from './map';
 import hent from '@/api';
 
 export default function ControlPage() {
@@ -23,7 +19,6 @@ export default function ControlPage() {
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const id = user.id;
-    const datoFormat = (dato) => format(new Date(dato), 'dd/MM/yyyy HH:mm');
     const centrer = {
         display: 'flex',
         alignItems: 'center',
@@ -33,21 +28,13 @@ export default function ControlPage() {
     }
 
     useEffect(() => {
-        //Henter data fra json fil
-        /*const fetchData = () => {
-            const result = data.filter(d => {
-                //console.log(d)
-                return d.id === id
-            })
-            return result
-        }
         //Henter data fra api*/
-        hent(setLocations, setError, `/Location/${id}`).then((d) => {
+        hent(setLocations, setError, `/${id}`).then((d) => {
             console.log(d)
             //console.log(locations)
             setUserLocations(d.geoLocations[0])
         })
-        hent(setData, setError, `/Location/GeoLocation/MeasurementSet/${id}?GeoLocationID=${2}&LocationID=${2}`).then((d) => {
+        hent(setData, setError, `/GeoLocation/MeasurementSet/${id}?GeoLocationID=${2}&LocationID=${2}`).then((d) => {
             setStartDate(datoFormat(d.startDate))
             setEndDate(datoFormat(d.endDate))
         })
@@ -71,11 +58,7 @@ export default function ControlPage() {
             <DatoValger dato={date} setDato={setDato} />
         )
     }*/
-    const handleMap = (p) => {
-        console.log(p)
-        setLocations({ lng: p?.longitude, lat: p?.latitude })
-        setShowMap(!showMap)
-    }
+
 
     let x = [];
     let y = [];
@@ -93,25 +76,13 @@ export default function ControlPage() {
         }
     }
     //viser start og slut dato på valgte målinger
-    const visDato = <Box sx={{ color: 'blue' }}>start: {startDate} slut: {endDate} </Box>
 
-    //viser geolokation på valgte måling og sætter dem til kort
 
-    const position = <Box sx={{ color: 'blue' }} >
-        latitude: {userlocations?.latitude} longtitude: {userlocations?.longitude}
-        <CustomizedButtons onClick={() => handleMap(userlocations)}>Show on map</CustomizedButtons>
-    </Box>
-
-    //console.log(x);*/
-    if (dataInfo) {
-        nydata()
-    }
 
     return (
         <Box sx={centrer}>
-            {position}
+
             <Box>2023</Box>
-            {visDato}
             <Plot
                 data={[
                     {
@@ -124,12 +95,7 @@ export default function ControlPage() {
                 ]}
                 layout={{ width: 1200, height: 500, title: titleString }}
             />
-            {
-                showMap ?
-                    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
-                        <MapPage geoLocations={locations} />
-                    </LoadScript> : <Box></Box>
-            }
+
         </Box>
     );
 }

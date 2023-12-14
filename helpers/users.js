@@ -3,20 +3,22 @@ export const user = {
         {
             id: 2,
             email: "kunde1@mail.us",
-            firstname: "Rosie",
-            lastname: "Martinez",
+            firstname: "Silas",
+            lastname: "Aagraard",
             password: "password",
-            company: "Boobs",
+            company: "Noisy",
+            locationId: 1,
             isAdmin: false,
             token: 0
         },
         {
             id: 1,
             email: "kunde2@mail.us",
-            firstname: "Bella",
-            lastname: "Martinez",
+            firstname: "Jeppe",
+            lastname: "Askaa",
             password: "password",
-            company: "Ass",
+            locationId: 3,
+            company: "Loudly",
             isAdmin: false,
             token: 2
         },
@@ -26,6 +28,7 @@ export const user = {
             firstname: "Chr",
             lastname: "tosse",
             password: "password",
+            locationId: 2,
             company: "Boobs",
             isAdmin: true,
             token: 1

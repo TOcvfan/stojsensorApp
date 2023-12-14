@@ -4,7 +4,9 @@ import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, 
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import MenuIcon from '@mui/icons-material/Menu';
+import logo from '@/media/dBSensor_logo_ 200px.png'
 import { useAppContext } from './AppContext';
+import Image from 'next/image';
 
 const NavBar = ({ navn, aktiv }) => {
     const { isLoggedIn } = useAppContext();
@@ -162,10 +164,7 @@ const NavBar = ({ navn, aktiv }) => {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Avatar sx={{ bgcolor: 'red' }} aria-label="S">
-                            DB
-                        </Avatar>
-
+                        <Image src={logo} alt='logo' width={100} />
                     </Box>
                 </Toolbar>
             </Container>

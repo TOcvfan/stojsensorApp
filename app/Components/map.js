@@ -10,11 +10,6 @@ export default function MapPage({ geoLocations }) {
     });
     const center = useMemo(() => ({ lat: 18.52043, lng: 73.856743 }), []);*/
 
-    const defaultCenter = {
-        lat: 37.7749,
-        lng: -122.4194,
-    };
-
 
     const mapStyles = {
         height: '50vh',

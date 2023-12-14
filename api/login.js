@@ -14,10 +14,10 @@ let item;
 const login = async (data, setMessage) => {
     console.log(data)
     const login = user.users.filter(u => {
-        console.log(u);
+        //console.log(u);
         data.email === u.email
     })
-    console.log(login)
+    //console.log(login)
     setMessage(login)
     return login
     /*const requestOptions = {
