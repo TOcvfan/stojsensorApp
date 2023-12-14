@@ -78,6 +78,7 @@ const Multiline = (props) => {
             padding: "4px !important"
           }
         }}
+        defaultValue={props.defaultValue}
         onChange={(e) => props.onChange(e.target.value)}
         error={!props.errors ? false : true}
         disableUnderline
@@ -148,17 +149,42 @@ const TextInput = (props) => {
   );
 };
 
-export default function Text(props) {
+const SelectText = ({ children, type, defaultValue, value, width, onChange, required, errors, label, id, select }) => {
+  return (
+    <ValidationTextField
+      id={id}
+      label={errors ? errors.message : label}
+      required={required}
+      error={!errors ? false : true}
+      type={type}
+      select={select}
+      onChange={onChange}
+      value={value}
+      sx={{
+        width: width,
+        color
+      }}
+      variant="outlined"
+      defaultValue={defaultValue}
+    >
+      {children}
+    </ValidationTextField>
+  )
+}
+
+export default function Text({ children, type, defaultValue, value, width, onChange, required, errors, label, id, autoFocus, rows, select }) {
   const inputType = (type) => {
     switch (type) {
       case "multiline":
-        return <Multiline {...props} />;
+        return <Multiline width={width} errors={errors} label={label} onChange={onChange} rows={rows} defaultValue={defaultValue} />;
       case "password":
-        return <Password {...props} />;
+        return <Password width={width} errors={errors} label={label} onChange={onChange} defaultValue={defaultValue} />;
+      case "select":
+        return <SelectText width={width} errors={errors} label={label} select={select} onChange={onChange} defaultValue={defaultValue} required={required} value={value} id={id}>{children}</SelectText>
       default:
-        return <TextInput {...props} />;
+        return <TextInput width={width} errors={errors} label={label} onChange={onChange} defaultValue={defaultValue} required={required} autoFocus={autoFocus} />;
     }
   };
 
-  return <Box sx={{ mt: '10px', mb: '10px' }}>{inputType(props.type)}</Box>;
+  return <Box sx={{ mt: '10px', mb: '10px' }}>{inputType(type)}</Box>;
 }
