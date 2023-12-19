@@ -1,3 +1,6 @@
 import hent from "./location";
+import nyPostAut from "./nypostAut";
+import nyPost from "./nyPost";
+//import rediger from "./Rediger";
 
-export default { hent };
+export { hent, nyPostAut, nyPost };
