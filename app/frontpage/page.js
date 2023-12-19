@@ -7,11 +7,13 @@ import { GoogleMap, MarkerF, useLoadScript, LoadScript } from "@react-google-map
 import { useRouter } from 'next/navigation';
 import withAuth from '$/withAuth';
 import { format } from 'date-fns'
-import Plot from 'react-plotly.js';
+import dynamic from "next/dynamic";
+const Plot = dynamic(() => import("react-plotly.js"), { ssr: false, })
 import hent from '@/api/location';
 import billede from '@/media/dBSendor_front_bg.jpg';
 import MapPage from '../Components/map';
 import Image from 'next/image';
+import FrontpageAdmin from './admin';
 
 const Frontpage = () => {
     const { user } = useAppContext();
@@ -26,12 +28,13 @@ const Frontpage = () => {
     const [measurementSets, setMeasurementSets] = useState([])
     const [showMeasurementSets, setShowMeasurementSets] = useState(false)
     const [measurements, setMeasurements] = useState([])
+    const [x, setX] = useState([])
+    const [y, setY] = useState([])
     const [showMeasurements, setShowMeasurements] = useState(false)
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const datoFormat = (dato) => format(new Date(dato), 'dd/MM/yyyy HH:mm');
-    let x = [];
-    let y = [];
+
     //
     useEffect(() => {
         //Henter data fra apihvis bruger er admin
@@ -51,10 +54,9 @@ const Frontpage = () => {
         //console.log(p)
         setLocations({ lng, lat })
         setShowMap(true)
+        setShowMeasurements(false)
     }
 
-    //til at navigere på siden
-    const router = useRouter();
     //css til forsiden
     const centrer = {
         display: 'flex',
@@ -76,45 +78,77 @@ const Frontpage = () => {
         return <div>Loading maps</div>;
     }
 
-
-    const getMapCord = (id) => {
-        hent(setGeoLocations, setError, `/${id}`).then((d) => {
-            console.log(d)
-            setShowGeoLocations(true)
-        })
-    }
     const showMesurementSet = (Geoid, locationId) => {
         hent(setMeasurementSets, setError, `/GeoLocation/MeasurementSet?GeoLocationID=${Geoid}&LocationID=${locationId}`).then((d) => {
             console.log(d)
-            setShowMeasurementSets(true)
-        })
-    }
-
-    const showMesurementplot = (Geoid, locationId, setId) => {
-        hent(setMeasurements, setError, `/GeoLocation/MeasurementSet/${setId}?GeoLocationID=${Geoid}&LocationID=${locationId}`).then((d) => {
-            console.log(d, 'plot')
-            setShowMeasurements(true)
-            //setStartDate(datoFormat(measurements.startDate))
-            //setEndDate(datoFormat(measurements.endDate))
-            if (showMap) { setShowMap(false) }
-            const sorted = measurements.measurements?.sort((p1, p2) => (p1.arduinoID > p2.arduinoID) ? 1 : (p1.arduinoID < p2.arduinoID) ? -1 : 0)
-            console.log(sorted, 'test')
-            if (sorted.length > 1) {
-                setTitleString(`start: ${measurements.startDate} slut: ${measurements.endDate}`)
-                sorted?.map((m) => {
-                    y.push(m.decibel)
-                    x.push(m.dateTime)
-                    return { x, y }
-                })
+            if (d.length > 0) {
+                //setMeasurementSetsData(d)
+                setShowMeasurementSets(true)
+                setError('')
             } else {
-                setTitleString('no mesurrements')
+                setShowMeasurementSets(false)
+                setError('No Data sets')
             }
-            console.log(x, 'ost')
         })
     }
-    //console.log(user)
 
-    const visDato = (startDate, endDate) => <Box sx={{ color: 'blue' }}>start: {startDate} slut: {endDate} </Box>
+    const showMesurementplot = (Geoid, locationId, setId, start, end) => {
+        setShowMeasurements(false)
+        setStartDate(start)
+        setEndDate(end)
+        setTitleString(`start: ${startDate} slut: ${endDate}`)
+        setX([])
+        setY([])
+        hent(setMeasurements, setError, `/GeoLocation/MeasurementSet/${setId}?GeoLocationID=${Geoid}&LocationID=${locationId}`).then((d) => {
+            //console.log(d, 'plot')
+            const sorted = measurements.measurements?.sort((p1, p2) => (p1.dateTime > p2.dateTime) ? 1 : (p1.dateTime < p2.dateTime) ? -1 : 0)
+            const data = async () => {
+                if (showMap) { setShowMap(false) }
+                //console.log(sorted, 'test')
+                if (sorted?.length > 1) {
+                    console.log('test')
+                    await sorted?.map((m) => {
+                        setX(x => [
+                            ...x,
+                            m.dateTime
+                        ])
+                        setY(y => [
+                            ...y,
+                            m.decibel
+                        ])
+                        //return { x, y }
+                    })
+                    setShowMeasurements(true)
+                } else {
+                    setShowMeasurements(false)
+                    setTitleString('no mesurrements')
+                }
+            }
+            data()
+            //console.log(x, 'ost')
+        })
+    }
+    //console.log(x, 'test2')
+
+    const visDato = (startDate, endDate) => {
+        return (
+            <Box sx={{ color: 'blue' }}>start: {startDate} slut: {endDate} </Box>
+        )
+    }
+
+    const grafButton = (geoid, locationId) => {
+        const sort = measurementSets?.sort((p1, p2) => (p1.startDate > p2.startDate) ? 1 : (p1.startDate < p2.startDate) ? -1 : 0)
+        return sort.map((sets) => {
+            const start = datoFormat(sets.startDate)
+            const end = datoFormat(sets.endDate)
+            return (
+                <Box key={sets.id}>
+                    {visDato(start, end)}
+                    <CustomizedButtons onClick={() => showMesurementplot(geoid, locationId, sets.id, start, end)}>Show on graf</CustomizedButtons>
+                </Box>
+            )
+        })
+    }
 
     const position = (geo, locationId) => <Box sx={{ color: 'blue' }} >
         latitude: {geo.latitude} longtitude: {geo.longitude}
@@ -123,14 +157,7 @@ const Frontpage = () => {
         <Box>
             {showMeasurementSets && <Box>
                 {
-                    measurementSets.map((sets) => {
-                        return (
-                            <Box key={sets.id}>
-                                {visDato(datoFormat(sets.startDate), datoFormat(sets.endDate))}
-                                <CustomizedButtons onClick={() => showMesurementplot(geo.id, locationId, sets.id)}>Show on graf</CustomizedButtons>
-                            </Box>
-                        )
-                    })
+                    grafButton(geo.id, locationId)
                 }
             </Box>}
         </Box>
@@ -140,17 +167,21 @@ const Frontpage = () => {
         if (user.isAdmin) {
             return (
                 <Box>
-                    <Box>
-                        {allLocations?.map(all => {
-                            return (
-                                <Box key={all.id}>
-                                    <Box>{all.name}</Box>
-                                    <CustomizedButtons onClick={() => getMapCord(all.id)}>Show geo locations</CustomizedButtons>
-                                </Box>
-                            )
-                        })}
-                    </Box>
-                    <CustomizedButtons onClick={() => router.push('./createuser')}>new user</CustomizedButtons>
+                    <FrontpageAdmin
+                        setGeoLocations={setGeoLocations}
+                        setShowGeoLocations={setShowGeoLocations}
+                        allLocations={allLocations}
+                        geoLocations={geoLocations}
+                        showGeoLocations={showGeoLocations}
+                        showMesurementplot={showMesurementplot}
+                        setMeasurementSets={setMeasurementSets}
+                        measurementSets={measurementSets}
+                        setError={setError}
+                        datoFormat={datoFormat}
+                        handleMap={handleMap}
+                        setMap={setShowMap}
+                        setPlot={setShowMeasurements}
+                    />
                 </Box>
             )
         }
@@ -170,12 +201,8 @@ const Frontpage = () => {
                 )
             })}
             {admin()}
-            {showGeoLocations && <Box><Box>{geoLocations.name}</Box>{geoLocations.geoLocations?.map((geo) => {
-                return (
-                    <Box key={geo.id}>{position(geo, geoLocations.id)}</Box>
-                )
-            })}</Box>}
             <Image src={billede} alt='test' height={50} />
+            <Box>{error}</Box>
             {
                 showMap ? <MapPage geoLocations={locations} /> : <Box></Box>
             }
@@ -191,7 +218,7 @@ const Frontpage = () => {
                         },
                     ]}
                     layout={{ width: 1200, height: 500, title: titleString }}
-                /> : <Box></Box>
+                /> : <Box>{error}</Box>
             }
         </Box>
 

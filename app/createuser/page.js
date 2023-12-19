@@ -1,5 +1,5 @@
+"use client"
 import React, { useState } from "react";
-
 import { CustomizedButtons, Text, Title } from '$/Components';
 import { Box, Checkbox, FormControlLabel } from '@/lib/mui';
 import { useAppContext } from '$/AppContext';

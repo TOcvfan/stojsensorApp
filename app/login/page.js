@@ -16,10 +16,10 @@ export default function Login() {
 	//til at sende videre til en anden side
 	const router = useRouter();
 	//til validering så man ikke sender tomt data
-	const schema = Yup.object().shape({
+	/*const schema = Yup.object().shape({
 		email: Yup.string().required(`What about your E-mail`),
 		password: Yup.string().required('You need a password to log in')
-	})
+	})*/
 
 	const defaultValues = {
 		email: '',
@@ -35,7 +35,7 @@ export default function Login() {
 	//til login formlaren
 	const { handleSubmit, formState: { errors }, control } = useForm({
 		defaultValues,
-		resolver: yupResolver(schema)
+		//resolver: yupResolver(schema)
 	});
 	//login funktionen når man har trykket login og at der står noget i de vigtige felter
 	const onSubmit = async (data) => {
@@ -103,7 +103,7 @@ export default function Login() {
 									errors={errors.brugernavn}
 								/>
 							}
-							rules={{ required: true }}
+							rules={{ required: false }}
 							type="text"
 							InputLabelProps={{
 								shrink: true,
@@ -128,7 +128,7 @@ export default function Login() {
 								/>
 							}
 							rules={{
-								required: true,
+								required: false,
 							}}
 							InputLabelProps={{
 								shrink: true,
