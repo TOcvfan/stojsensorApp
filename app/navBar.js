@@ -9,14 +9,14 @@ import { useAppContext } from './AppContext';
 import Image from 'next/image';
 
 const NavBar = ({ navn, aktiv }) => {
-    const { isLoggedIn } = useAppContext();
+    const { user, isLoggedIn } = useAppContext();
     const [anchorElNav, setAnchorElNav] = useState(null);
     const about = { name: 'About us', link: '/about', targetSegment: 'about' };
+    const control = !user.isAdmin ? { name: 'Control panel', link: '/control', targetSegment: 'control' } : about
 
     let pagesLoggedIn = [
         { name: 'Frontpage', link: '/frontpage', targetSegment: 'frontpage' },
-        { name: 'Control panel', link: '/control', targetSegment: 'control' },
-        about
+        control,
     ]
 
     let pagesNotLoggedIn = [

@@ -7,39 +7,40 @@ import { useRouter } from 'next/navigation';
 import { Box } from '@/lib/mui';
 import { nyPost } from '@/api';
 //import Title from '/Components/title';
-import { CustomizedButtons, Text } from '$/Components';
+import { CustomizedButtons, DatoValger, Text, Title } from '$/Components';
 import { format } from 'date-fns';
 
-export default function PostComment({ setResponse, data }) {
-    const schema = Yup.object().shape({
-        topic: Yup.string().required('There need to be a title'),
-        message: Yup.string().required('There need to be a text'),
-    })
-    const result = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+export default function PostMessurementSet({ setResponse, geoId, locationId }) {
+    const result = new Date()
+    const defaultstart = format(result, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+
+    const oneday = new Date(Date.now() + (3600 * 1000 * 24))
+    const defaultend = format(oneday, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 
     const defaultValues = {
-        userID: data.locationId,
-        topic: '',
-        message: '',
-        lastEdited: result
+        name: '',
+        startDate: result,
+        endDate: oneday
     }
+
+    const measurements = []
 
     const [isLoading, setIsLoading] = useState(false);
     const [status, setStatus] = useState('');
     //const navigate = useNavigate();
 
-    const { handleSubmit, formState: { errors }, control } = useForm({
+    const { handleSubmit, formState: { errors }, control, setValue } = useForm({
         defaultValues,
-        resolver: yupResolver(schema)
+        //resolver: yupResolver(schema)
     });
 
 
     const onSubmit = async (formData) => {
         setIsLoading(true)
-        console.log(formData)
-        //const nyData = { ...formData, userID: data.locationId }
+        const opdateretData = { ...formData, measurements }
+        console.log(opdateretData, 'datasent')
         try {
-            await nyPost(formData, setResponse, `/GeoLocation/MeasurementSet/Comment?LocationID=${data.locationId}&GeoLocationID=${data.Geoid}&MeasurementSetID=${data.setId}`)
+            await nyPost(opdateretData, setResponse, `/GeoLocation/MeasurementSet?geoLocationID=${geoId}&locationID=${locationId}`)
             //console.log(message)
             setIsLoading(false)
         } catch (err) {
@@ -47,6 +48,7 @@ export default function PostComment({ setResponse, data }) {
             //console.log(message)
             setStatus(err)
         } finally {
+            setStatus('Done')
             //console.log(message)
             setIsLoading(false)
         }
@@ -66,42 +68,44 @@ export default function PostComment({ setResponse, data }) {
                 <Box sx={centrer}>
                     <Controller
                         control={control}
-                        name="topic"
+                        name="name"
                         render={({ field: { onChange } }) =>
                             <Text
                                 width={300}
-                                label='Topic'
+                                label='Messurment name'
                                 type='text'
                                 onChange={onChange}
                                 errors={errors?.password}
                             />
                         }
-                        rules={{
-                            required: true,
-                        }}
                         InputLabelProps={{
                             shrink: true,
                         }}
                     />
                 </Box>
-                {errors && errors.topic?.message}
                 <Box sx={centrer}>
                     <Controller
                         control={control}
-                        name="message"
+                        name="startDate"
+                        defaultValue={defaultstart}
                         render={({ field: { onChange } }) =>
-                            <Text
-                                width={300}
-                                label='Message'
-                                type='multiline'
-                                rows={4}
-                                onChange={onChange}
-                                errors={errors?.password}
-                            />
+                            <DatoValger onChange={onChange} setValue={setValue} dato={result} name='startDate' />
                         }
-                        rules={{
-                            required: true,
+                        type="text"
+                        InputLabelProps={{
+                            shrink: true,
                         }}
+                    />
+                </Box>
+                <Box sx={centrer}>
+                    <Controller
+                        control={control}
+                        name="endDate"
+                        defaultValue={defaultend}
+                        render={({ field: { onChange } }) =>
+                            <DatoValger onChange={onChange} setValue={setValue} dato={oneday} name='endDate' />
+                        }
+                        type="text"
                         InputLabelProps={{
                             shrink: true,
                         }}
@@ -110,7 +114,7 @@ export default function PostComment({ setResponse, data }) {
                 <div>
                     <CustomizedButtons type="submit" disabled={isLoading}>Send</CustomizedButtons>
                 </div>
-                <label>{status}</label>
+                <Title>{status}</Title>
             </Box>
         </form >
     );

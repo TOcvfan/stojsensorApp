@@ -4,12 +4,12 @@ import React, { createContext, useState, useContext } from 'react';
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-    const [language, setLanguage] = useState('Dk');
+    const [locations, setLocations] = useState({});
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState({});
     const value = {
-        language,
-        setLanguage,
+        locations,
+        setLocations,
         isLoggedIn,
         setIsLoggedIn,
         user,

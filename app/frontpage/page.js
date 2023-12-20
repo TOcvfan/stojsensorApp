@@ -17,13 +17,13 @@ import FrontpageAdmin from './admin';
 import PostComment from './postComments';
 
 const Frontpage = () => {
-    const { user } = useAppContext();
+    const { user, locations, setLocations } = useAppContext();
     const [showMap, setShowMap] = useState(false);
     const [titleString, setTitleString] = useState('');
     const [error, setError] = useState(false)
-    const [locations, setLocations] = useState({ lat: 18.52043, lng: 73.856743 })
+    const [cords, setCords] = useState({ lat: 18.52043, lng: 73.856743 })
     const [allLocations, setAllLocations] = useState([])
-    const [userLocations, setUserLocations] = useState({})
+    //const [locations, setLocations] = useState({})
     const [geoLocations, setGeoLocations] = useState()
     const [showGeoLocations, setShowGeoLocations] = useState(false)
     const [measurementSets, setMeasurementSets] = useState([])
@@ -43,18 +43,18 @@ const Frontpage = () => {
         if (user.isAdmin) {
             hent(setAllLocations, setError, `/`).then((d) => {
                 console.log(d)
-                //console.log(locations)
-                //setUserLocations(d.geoLocations[0])
+                //console.log(cords)
+                //setLocations(d.geoLocations[0])
+            })
+        } else {
+            hent(setLocations, setError, `/${user.locationId}`).then((d) => {
+                console.log(d)
             })
         }
-        hent(setUserLocations, setError, `/${user.locationId}`).then((d) => {
-            console.log(d)
-        })
-
     }, []);
     const handleMap = (lng, lat) => {
         //console.log(p)
-        setLocations({ lng, lat })
+        setCords({ lng, lat })
         setShowMap(true)
         setShowMeasurements(false)
     }
@@ -82,7 +82,7 @@ const Frontpage = () => {
 
     const showMesurementSet = (Geoid, locationId) => {
         hent(setMeasurementSets, setError, `/GeoLocation/MeasurementSet?GeoLocationID=${Geoid}&LocationID=${locationId}`).then((d) => {
-            console.log(d)
+            //console.log(d)
             if (d.length > 0) {
                 //setMeasurementSetsData(d)
                 setShowMeasurementSets(true)
@@ -97,7 +97,7 @@ const Frontpage = () => {
     const showMesurementplot = async (Geoid, locationId, setId) => {
         setShowMeasurements(false)
         await hent(setMeasurements, setError, `/GeoLocation/MeasurementSet/${setId}?GeoLocationID=${Geoid}&LocationID=${locationId}`).then((d) => {
-            console.log(d)
+            //console.log(d)
             setX(() => [])
             setY(() => [])
             setTitleString('')
@@ -111,7 +111,7 @@ const Frontpage = () => {
                 setStartDate(datoFormat(d.startDate))
                 setEndDate(datoFormat(d.endDate))
                 setTitleString(`start: ${datoFormat(d.startDate)} slut: ${datoFormat(d.endDate)}`)
-                console.log('test')
+                //console.log('test')
                 sorted?.map((m) => {
                     setX(x => [
                         ...x,
@@ -209,6 +209,7 @@ const Frontpage = () => {
         if (user.isAdmin) {
             return (
                 <Box>
+                    <Box>All Geolocations</Box><br />
                     <FrontpageAdmin
                         setGeoLocations={setGeoLocations}
                         setShowGeoLocations={setShowGeoLocations}
@@ -226,6 +227,18 @@ const Frontpage = () => {
                     />
                 </Box>
             )
+        } else {
+            return (
+                <Box>
+                    <Box>Your Geolocations</Box><br />
+                    {locations.name}
+                    {locations.geoLocations?.map((geo) => {
+                        return (
+                            <Box key={geo.id}>{position(geo, locations.id)}</Box>
+                        )
+                    })}
+                </Box>
+            )
         }
     }
 
@@ -233,18 +246,11 @@ const Frontpage = () => {
         <Box sx={centrer}>
             <Title color='blue'>Welcome to your frontpage {user.firstname}</Title>
             <br />
-            <Box>Your Geolocations</Box><br />
-            {userLocations.name}
-            {userLocations.geoLocations?.map((geo) => {
-                return (
-                    <Box key={geo.id}>{position(geo, userLocations.id)}</Box>
-                )
-            })}
             {admin()}
             <Image src={billede} alt='test' height={50} />
             <Box>{error}</Box>
             {
-                showMap ? <MapPage geoLocations={locations} /> : <Box></Box>
+                showMap ? <MapPage geoLocations={cords} /> : <Box></Box>
             }
             {
                 showMeasurements && plotly()

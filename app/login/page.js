@@ -42,7 +42,7 @@ export default function Login() {
 		let rolle;
 		//setIsLoading(true)
 		setIsLoggedIn(true)
-		setUser(user.users[2])
+		setUser(user.users[0])
 		//navigerer til forsiden
 		router.push('./frontpage');
 		//kalder funktionen der laver apikaldet tol login
